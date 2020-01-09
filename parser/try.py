@@ -1,4 +1,7 @@
 import nltk
+import sys
+path1 = sys.argv[1]
+path2 = sys.argv[2]
 
 """
 Uses trygram.cfg. Here it is just for clarity's sake:
@@ -11,9 +14,25 @@ VP -> V DP | VP PP
 V -> "saw"
 PP -> P DP
 P -> "with"
+
+Added probgram.cfg with arbitrarily assigned probabilities to check how it would work with the parsers:
+
+S -> DP VP  [1.0]
+DP -> D NP  [1.0]
+NP -> "pirate"  [0.4]
+NP -> "telescope"   [0.4]
+NP -> NP PP [0.2]
+D -> "a"    [0.5]
+D -> "the"  [0.5]
+VP -> V DP  [0.7]
+VP -> VP PP [0.3]
+V -> "saw"  [1.0]
+PP -> P DP  [1.0]
+P -> "with" [1.0]
 """
 
 # Code taken from Section 4.4, Chapter 8 of the NLTK book
+# Would not let me make it a module due to whitespace issues
 def init_wfst(tokens, grammar):
     numtokens = len(tokens)
     wfst = [[None for i in range(numtokens+1)] for j in range(numtokens+1)]
@@ -51,57 +70,77 @@ response = input("Hello. Shall we begin?\n")
 if response.lower() != "yes":
     exit()
 
-# Setting up a trial grammar. Seems to access the file alright.
-print("Accessing grammar...") 
-grammar2 = nltk.data.load('file:C:/Users/Dan/Desktop/Parser/parser/trygram.cfg')
-for p in grammar2.productions():
+# Setting up a trial grammar. Seems to access the files alright.
+print("Accessing grammars...") 
+grammar1 = nltk.data.load(path1)
+grammar2 = nltk.data.load(path2)
+print("Found two available grammars:\n 1.Simple CFG\n 2.PCFG\n")
+response = input("Please press '1' for CFG or '2' for PCFG.\n")
+if response == "1":
+    grammar = grammar1
+    name = "CFG"
+elif response == "2":
+    grammar = grammar2
+    name = "PCFG"
+
+print("\nYou have chosen " + name + ". Listing the grammar's productions:")
+for p in grammar.productions():
     print(p)
  
-# Now let's try and parse a bitch.
-print("Using Chart as the default parser")
-c_parser = nltk.ChartParser(grammar2)
-sentence = input("Enter a sentence now:\n").lower().split()
-for tree in c_parser.parse(sentence):
-    print(tree)
-# NLTK's chart parser working fine.
+sentence = input("\nEnter a sentence now:\n").lower().split()
 
-response = input("Should we try a different parser?\n")
+# Now let's try and parse the bitch.
+if grammar == grammar2:
+    print("\nUsing Viterbi as the default parser")
+    v_parser = nltk.ViterbiParser(grammar)
+    for tree in v_parser.parse(sentence):
+        print(tree)
+        # Works fine, but only with PCFGs as it requires probability values.
+        # Conversely, non-probabilistic parsers seem to disregard those and work fine with PCFGs as input.
+else:
+    print("\nUsing Chart as the default parser")
+    c_parser = nltk.ChartParser(grammar)
+    for tree in c_parser.parse(sentence):
+        print(tree)
+        # NLTK's chart parser working fine.
+
+response = input("\nShould we try a different parser?\n")
 if response.lower() != "yes":
     print("Finished.")
     exit()
 
-print("Switching parsers...")
+### WFST ###
+print("\nSwitching parsers...")
 print("Using WFST...")
-sentence = input("Enter a sentence now:\n").lower().split()
-wfst = init_wfst(sentence, grammar2)
+wfst = init_wfst(sentence, grammar)
 display(wfst, sentence)
 print("Showing full grid...")
-wfst1 = complete_wfst(wfst, sentence, grammar2)
+wfst1 = complete_wfst(wfst, sentence, grammar)
 display(wfst1, sentence)
 
-response = input("Should we try a different parser?\n")
+response = input("\nShould we try a different parser?\n")
 if response.lower() != "yes":
-    print("Finished.")
+    print("\nFinished.")
     exit()
 # Works fine as well. Will look more into it later.
 
-print("Switching parsers...")
+### SHIFTREDUCE ###
+print("\nSwitching parsers...")
 print("Using ShiftReduce...")
-sr_parser = nltk.ShiftReduceParser(grammar2)
-sentence = input("Enter a sentence now:\n").lower().split()
+sr_parser = nltk.ShiftReduceParser(grammar)
 for tree in sr_parser.parse(sentence):
     print(tree)
 # ShiftReduce seems to provide no output - addressed in the chapter.
 
-response = input("Should we try a different parser?\n")
+response = input("\nShould we try a different parser?\n")
 if response.lower() != "yes":
     print("Finished.")
     exit()
 
-print("Switching parsers...")
+### RECURSIVEDESCENT ###
+print("\nSwitching parsers...")
 print("Using RecursiveDescent...")
-rd_parser = nltk.RecursiveDescentParser(grammar2)
-sentence = input("Enter a sentence now:\n").lower().split()
+rd_parser = nltk.RecursiveDescentParser(grammar)
 for tree in rd_parser.parse(sentence):
     print(tree)
 # Hmm. Seems to enter an endless loop wherever left-recursion is ivolved, as predicted.
