@@ -1,7 +1,8 @@
 import nltk
 import sys
-path1 = sys.argv[1]
-path2 = sys.argv[2]
+# Make sure to provide both grammars as arguments when running the script:
+path1 = sys.argv[1] # trygram.cfg goes here
+path2 = sys.argv[2] # probgram.cfg goes here
 
 """
 Uses trygram.cfg. Here it is just for clarity's sake:
