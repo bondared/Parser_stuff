@@ -1,5 +1,6 @@
 import nltk
 import sys
+import woofst as wf
 # Make sure to provide both grammars as arguments when running the script:
 path1 = sys.argv[1] # trygram.cfg goes here
 path2 = sys.argv[2] # probgram.cfg goes here
@@ -31,7 +32,7 @@ V -> "saw"  [1.0]
 PP -> P DP  [1.0]
 P -> "with" [1.0]
 """
-
+"""
 # Code taken from Section 4.4, Chapter 8 of the NLTK book
 # Would not let me make it a module due to whitespace issues
 def init_wfst(tokens, grammar):
@@ -64,7 +65,7 @@ def display(wfst, tokens):
         for j in range(1, len(wfst)):
             print("%-4s" % (wfst[i][j] or '.'), end=" ")
         print()
-
+"""
 
 
 response = input("Hello. Shall we begin?\n")
@@ -113,11 +114,11 @@ if response.lower() != "yes":
 ### WFST ###
 print("\nSwitching parsers...")
 print("Using WFST...")
-wfst = init_wfst(sentence, grammar)
-display(wfst, sentence)
+wfst = wf.init_wfst(sentence, grammar)
+wf.display(wfst, sentence)
 print("Showing full grid...")
-wfst1 = complete_wfst(wfst, sentence, grammar)
-display(wfst1, sentence)
+wfst1 = wf.complete_wfst(wfst, sentence, grammar)
+wf.display(wfst1, sentence)
 
 response = input("\nShould we try a different parser?\n")
 if response.lower() != "yes":
