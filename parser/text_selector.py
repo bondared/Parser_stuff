@@ -45,7 +45,7 @@ while flag:
         clean_text = "\n".join(clean_sents)
         # Save it to the first argument path.
         with open(path1, "w") as mr_clean:
-            print(clean_text, file=mr_clean)
+            print(clean_text, file = mr_clean)
             print("Done.")
         print("\nRetrieving all rules from the tagged text and saving as " + str(path2) + "...")
         # Import the list of tuples from Brown. Every tuple is ("Word", "Tag").
@@ -53,12 +53,13 @@ while flag:
         ruleset = []
         with open(path2, "w") as file_tagged:
             # Reduce the list of tuples to contain only unique items.
-            for word, tag in set(text_tagged):
+            for word, tag in text_tagged:
                 # Rewrite the tuples to the form "Tag" -> "Word", throw them into a new list.
-                rule = str(tag) + " -> '" + str(word) + "'"
+                # NB: Make each word lowercase so that we wouldn't have duplicated entries in the ruleset.
+                rule = str(tag) + " -> '" + str(word.lower()) + "'"
                 ruleset.append(rule)
             # Write every element from the new list one-by-one to the second argument path.  
-            for rule in sorted(ruleset):
+            for rule in sorted(set(ruleset)):
                 print(rule, file=file_tagged)
             print("Done.")
         flag = ""

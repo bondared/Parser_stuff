@@ -1,3 +1,10 @@
+import sys
+# Added to make the script a little more flexible.
+try:
+    path = sys.argv[1] # Allows a custom filename.
+except:
+    path = "rules"     # Uses "rules" as the default.
+
 
 # zeigt alle in einer Datei vorkommenden Klassen an 
 def existing_classes(datei):    
@@ -8,7 +15,7 @@ def existing_classes(datei):
     return set(collect_class)
 
 # welche klassen gibt es?
-existing_classes("rules")
+print(existing_classes(path))
 
 # eine liste mit allen klassen:
 stated_classes = [['.',['.']],['A',['ADJ']],
@@ -21,10 +28,9 @@ stated_classes = [['.',['.']],['A',['ADJ']],
 # Beispiel: ['V'              ['VERB','ADV']]
 #             stated class    contains
 
-
-def make_lexikon(datei):
-    
-    st_cl = stated_classes
+def make_lexikon(datei, classes):   
+# Added "classes" as an argument so that the function is not as tied to a predefined variable.
+    st_cl = classes
     textfile = open(datei+".txt","r")
     collect_classes = []
     stated_classes_container = [[x[0],[]] for x in st_cl]
@@ -48,12 +54,13 @@ def make_lexikon(datei):
             if strich == 'n':
                 lexikon.write(str(" \""+z+"\""))
             if strich == "j":
-                lexikon.write(str(" | \""+z+"\""))
-            if z == w[2][-1]:   # wenn letztes element der vokabelliste mache linebreak
-                lexikon.write(str(" | \""+z+"\"\n"))
+                # Changed this a bit since the previous order would write every last member of a category twice.
+                if z == w[2][-1]:   # wenn letztes element der vokabelliste mache linebreak
+                    lexikon.write(str(" | \""+z+"\"\n"))
+                else:
+                    lexikon.write(str(" | \""+z+"\""))
             strich = "j"
-    lexikon.close
+    lexikon.close()
     
 # erstellt lexikon mit dem dateinamen + endung "_lexikon.txt"    
-make_lexikon('rules')        
-            
+make_lexikon(path, stated_classes)
