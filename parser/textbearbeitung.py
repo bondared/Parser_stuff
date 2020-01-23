@@ -1,4 +1,4 @@
-def ersetzen(was,durch_was,datei):
+def ersetzen(was,datei):
 
     import re
         
@@ -6,17 +6,12 @@ def ersetzen(was,durch_was,datei):
     neue_datei = open(datei+'1.txt','w')
     
     for line in alte_datei:
-        new_line = re.sub(was, durch_was, line)
+        new_line = re.sub(was, '', line)
         neue_datei.write(new_line)
     
     neue_datei.close()
-        
-  
 
+zeichen_zum_ersetzen = r"( \.|,|``|\'\'|!|;|\?)"
 
-ersetzen(' \.'  ,'',  'text'     )
-ersetzen(','    ,'',  'text1'    )
-ersetzen('``'   ,'',  'text11'   )
-ersetzen('\'\'' ,'',  'text111'  )
-ersetzen('!'    ,'',  'text1111' )
-ersetzen(';'    ,'',  'text11111')
+ersetzen(zeichen_zum_ersetzen , 'text')
+
