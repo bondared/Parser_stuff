@@ -55,5 +55,23 @@ def make_lexikon(datei):
     lexikon.close
     
 # erstellt lexikon mit dem dateinamen + endung "_lexikon.txt"    
-make_lexikon('rules')        
+make_lexikon('rules') 
+
+
+## 
+
+stated_classes = [['.',['.']],['A',['ADJ']],
+                  ['AD',['ADV']],['C',['CONJ']],
+                  ['D',['DET']],['N',['NOUN']],
+                  ['NU',['NUM']],['P',['PRON']],
+                  ['PR',['PRT']],['V',['VERB']]]
+                  
+                
+# alles was kein 0 bis 9 und a bis z gross klein ist 
+
+sentence = re.sub(' . ', '', line).strip()
+sentence = re.sub(' , ', '', line).strip()
+sentecee
+
+sentence = re.sub()
             
