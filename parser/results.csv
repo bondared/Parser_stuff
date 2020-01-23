@@ -1,0 +1,35 @@
+"a pirate a pirate
+",0,
+"a pirate saw a pirate with a telescope
+",1,"(S
+  (DP (D a) (NP pirate))
+  (VP
+    (VP (V saw) (DP (D a) (NP pirate)))
+    (PP (P with) (DP (D a) (NP telescope)))))
+(S
+  (DP (D a) (NP pirate))
+  (VP
+    (V saw)
+    (DP
+      (D a)
+      (NP (NP pirate) (PP (P with) (DP (D a) (NP telescope)))))))"
+"a pirate with a telescope saw the pirate with a telescope
+",1,"(S
+  (DP (D a) (NP (NP pirate) (PP (P with) (DP (D a) (NP telescope)))))
+  (VP
+    (VP (V saw) (DP (D the) (NP pirate)))
+    (PP (P with) (DP (D a) (NP telescope)))))
+(S
+  (DP (D a) (NP (NP pirate) (PP (P with) (DP (D a) (NP telescope)))))
+  (VP
+    (V saw)
+    (DP
+      (D the)
+      (NP (NP pirate) (PP (P with) (DP (D a) (NP telescope)))))))"
+"a pirate a telescope with a pirate saw a pirate 
+",0,
+"a pirate saw a pirate 
+",1,(S (DP (D a) (NP pirate)) (VP (V saw) (DP (D a) (NP pirate))))
+a pirate with a telescope saw a pirate ,1,"(S
+  (DP (D a) (NP (NP pirate) (PP (P with) (DP (D a) (NP telescope)))))
+  (VP (V saw) (DP (D a) (NP pirate))))"
