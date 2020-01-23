@@ -54,7 +54,7 @@ successes = 0
 
 # Take sentences from text line-by-line, get parsing.
 for line in text:
-    sentence = line.strip()
+    sentence = re.sub(r'[^\w-]', ' ', line).strip()
     with open('debuggin.txt', 'w') as file:
         file.write(sentence)
     parses = [] # Save all possible trees to a list
