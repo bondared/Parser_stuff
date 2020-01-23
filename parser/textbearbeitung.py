@@ -13,5 +13,10 @@ def ersetzen(was,durch_was,datei):
         
   
 
-ersetzen(' \.','','text')
-ersetzen(' \.','','text')
+
+ersetzen(' \.'  ,'',  'text'     )
+ersetzen(','    ,'',  'text1'    )
+ersetzen('``'   ,'',  'text11'   )
+ersetzen('\'\'' ,'',  'text111'  )
+ersetzen('!'    ,'',  'text1111' )
+ersetzen(';'    ,'',  'text11111')
