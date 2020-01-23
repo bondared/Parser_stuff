@@ -1,3 +1,7 @@
+import sys
+
+path1 = sys.argv[1]
+
 def ersetzen(was,datei):
 
     import re
@@ -13,7 +17,4 @@ def ersetzen(was,datei):
 
 zeichen_zum_ersetzen = r"( \.|,|``|\'\'|!|;|\?)"
 
-ersetzen(zeichen_zum_ersetzen , 'text')
-
-
-
+ersetzen(zeichen_zum_ersetzen , path1)

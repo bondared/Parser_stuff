@@ -16,6 +16,7 @@ print("####################################################")
 
 ### Load everything in ###
 # Load in the grammar via specified path.
+"""
 print("\nAccessing grammar...")
 try:
     grammar = nltk.data.load(gram_path)
@@ -43,6 +44,17 @@ if response.lower().strip() != "yes":
     exit()
 else:
     print("\nUsing Chart as the chosen parser.")
+"""
+
+
+grammar = nltk.data.load(gram_path)
+c_parser = nltk.ChartParser(grammar, trace=2)
+print("Done. Using " + gram_path + " as the chosen grammar.\n\nListing the grammar's productions:")
+for p in grammar.productions():
+    print(p)
+        
+text = open(text_path, 'r')
+print("Done. Using " + text_path + " as the chosen text.")
 
 ### Core loop ###
 # Set up the lists that will serve as our table's columns.

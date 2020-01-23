@@ -5,7 +5,7 @@ import sys
 ### CHANGE THESE TO CUSTOM PATHS IF RUNNING CODE IN SPYDER (e.g. "C:\Users\User\Desktop\filename.txt").###
 path1 = sys.argv[1] # Raw text file name, e.g. text.
 path2 = sys.argv[2] # Preliminary rules file name, e.g. rules.
-path3 = sys.argv[3] # Overhead grammar file name, e.g. overhead.
+#path3 = sys.argv[3] # Overhead grammar file name, e.g. overhead.
 
 print("Welcome to text selector.\nThe Brown corpus has texts from the following genres:")
 for cat in brown.categories():
