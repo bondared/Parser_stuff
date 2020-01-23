@@ -70,6 +70,8 @@ while flag:
             print("Done.")
         flag = ""
 
+"""
+
 # eine liste mit allen klassen:
 # Might need to rework it to include all possible cats listed for the tagset, or maybe change tagsets outright
 stated_classes = [['A',['ADJ']],['P',['ADP']],
@@ -116,6 +118,8 @@ def make_gram(filepath, grampath, classes):
     fullgram.close()
     
 make_gram(path2, path3, stated_classes)
+
+"""
 
 # Just needed something to bugtest.
 response = input("\nTo quit the selector, press ENTER.\n")
