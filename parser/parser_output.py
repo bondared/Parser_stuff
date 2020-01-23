@@ -49,10 +49,14 @@ else:
 sentlist = []
 succlist = []
 parselist = []
+# Set up a variable to track the number of successful parses.
+successes = 0
 
 # Take sentences from text line-by-line, get parsing.
 for line in text:
-    sentence = re.sub(r'[^\w]', ' ', line).strip()
+    sentence = line.strip()
+    with open('debuggin.txt', 'w') as file:
+        file.write(sentence)
     parses = [] # Save all possible trees to a list
     for parse in c_parser.parse(sentence.lower().split()):
         parses.append(str(parse))
@@ -66,18 +70,23 @@ for line in text:
     if len(parses) == 0:
         succlist.append(0)
     else:
-        succlist.append(1)    
+        succlist.append(1)
+        successes += 1
+
+# Use the variable to calculate the percentage of successful parses.
+    percent = int((successes / len(succlist))*100)
+    print("Successfully parsed " + 
+          str(successes) + 
+          " sentences out of " + 
+          str(len(succlist)) + 
+          "(approximately " + str(percent) + "%).")
+    print("Writing the detailed log to " + results_path + "...")
 
 ### Building and saving a Dataframe ###
 # IMPORTANT: Length of all three arrays should be identical, as they correspond to the columns of the dataframe. 
 # This is why for multiple trees per sent, we throw them in a list of their own and append that instead.
-
-print("\nBuilding dataframe...")
 data = {"sent":sentlist, "success":succlist, "parses":parselist} # Sets up a dictionary based on the filled-out lists.
 df = pd.DataFrame.from_dict(data) # Turns it into a simple data frame.
-print("Done.")
-
-print("\nWriting file...") # Saves it under the name put in as the second argument.
 df.to_csv(results_path, header=False, index=False)
 print("Done.")
 

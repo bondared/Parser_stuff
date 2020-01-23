@@ -21,8 +21,8 @@ print(existing_classes(path))
 stated_classes = [['.',['.']],['A',['ADJ']],
                   ['AD',['ADV']],['C',['CONJ']],
                   ['D',['DET']],['N',['NOUN']],
-                  ['NU',['NUM']],['P',['PRON']],
-                  ['PR',['PRT']],['V',['VERB']]]
+                  ['NU',['NUM']],['PR',['PRON']],
+                  ['P',['PRT']],['V',['VERB']]]
                   
                 
 # Beispiel: ['V'              ['VERB','ADV']]
