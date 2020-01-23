@@ -52,7 +52,7 @@ while flag:
         
         print("\nRetrieving all terminals from the tagged text and saving as " + str(path2) + ".txt...")
         # Import the list of tuples from Brown. Every tuple is ("Word", "Tag").
-        text_tagged = brown.tagged_words(fileids=[idquery], tagset='universal')
+        text_tagged = brown.tagged_words(fileids=[idquery])
         tags_raw = open(path2 + "_raw.txt", "w")
         for line in text_tagged:
             tags_raw.write(str(line))
