@@ -15,3 +15,5 @@ zeichen_zum_ersetzen = r"( \.|,|``|\'\'|!|;|\?)"
 
 ersetzen(zeichen_zum_ersetzen , 'text')
 
+
+
