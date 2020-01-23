@@ -3,7 +3,7 @@ def ersetzen(was,datei):
     import re
         
     alte_datei = open(datei+'.txt','r')
-    neue_datei = open(datei+'1.txt','w')
+    neue_datei = open(datei+'_bearbeitet.txt','w')
     
     for line in alte_datei:
         new_line = re.sub(was, '', line)
