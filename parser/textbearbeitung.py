@@ -1,6 +1,8 @@
 import sys
-
-path1 = sys.argv[1]
+try:
+    path1 = sys.argv[1]
+except:
+    path1 = "text"
 
 def ersetzen(was,datei):
 
@@ -11,7 +13,7 @@ def ersetzen(was,datei):
     
     for line in alte_datei:
         new_line = re.sub(was, '', line)
-        neue_datei.write(new_line)
+        neue_datei.write(new_line.strip())
     
     neue_datei.close()
 
