@@ -1,13 +1,19 @@
-from nltk.corpus import brown
 import sys
-### ANACONDA PROMPT CODE: "python <scriptname> <firstargument> <secondargument>"
+from nltk.corpus import brown
 
 ### CHANGE THESE TO CUSTOM PATHS IF RUNNING CODE IN SPYDER (e.g. "C:\Users\User\Desktop\filename.txt").###
-path1 = sys.argv[1] # Raw text file name, e.g. text.
-path2 = sys.argv[2] # Preliminary rules file name, e.g. rules.
-#path3 = sys.argv[3] # Overhead grammar file name, e.g. overhead.
+try:
+    path1 = sys.argv[1] # Raw text file name, e.g. text.
+    path2 = sys.argv[2] # Preliminary rules file name, e.g. rules.
+except:
+    path1 = "text"
+    path2 = "rules"
 
-print("Welcome to text selector.\nThe Brown corpus has texts from the following genres:")
+### Greet the user ###
+print("\n#####################################################################")
+print("Hello. This is the script for selecting texts and extracting POS tags.")
+print("######################################################################")
+print("\nThe Brown corpus has texts from the following genres:")
 for cat in brown.categories():
     print(cat)
 
@@ -53,9 +59,6 @@ while flag:
         print("\nRetrieving all terminals from the tagged text and saving as " + str(path2) + ".txt...")
         # Import the list of tuples from Brown. Every tuple is ("Word", "Tag").
         text_tagged = brown.tagged_words(fileids=[idquery])
-        tags_raw = open(path2 + "_raw.txt", "w")
-        for line in text_tagged:
-            tags_raw.write(str(line))
         ruleset = []
         with open(path2 + ".txt", "w") as file_tagged:
             # Reduce the list of tuples to contain only unique items.
@@ -69,57 +72,6 @@ while flag:
                 print(rule, file=file_tagged)
             print("Done.")
         flag = ""
-
-"""
-
-# eine liste mit allen klassen:
-# Might need to rework it to include all possible cats listed for the tagset, or maybe change tagsets outright
-stated_classes = [['A',['ADJ']],['P',['ADP']],
-                  ['Adv',['ADV']],['C',['CONJ']],
-                  ['D',['DET']],['N',['NOUN']],
-                  ['NU',['NUM']],['PR',['PRON']],
-                  ['PT',['PRT']],['V',['VERB', 'AUX']]]
-                  
-
-def make_gram(filepath, grampath, classes):   
-# Added "classes" as an argument so that the function is not as tied to a predefined variable.
-    textfile = open(filepath + ".txt","r")
-    collect_classes = []
-    stated_classes_container = [[x[0],[]] for x in classes]
-    
-    # sammelt fuer jede class alle begriff ein
-    for line in textfile:
-        for st,stc in zip(classes,stated_classes_container):
-            if line[0:line.find(" ")] in st[1]:
-                stc[1].append(line[line.find("'")+1:-2])
-    
-    # erstellt die einzelnen lexikon zeilen
-    for stc in stated_classes_container:
-        stc.insert(1, " ->")
-    
-    fullgram = open(filepath + "_gram.cfg","w")
-    for rule in open(grampath + ".cfg", "r"):
-        fullgram.write(rule)
-    
-    for st_cl in stated_classes_container:
-        fullgram.write(st_cl[0]) # schreibt die Klasse
-        fullgram.write(st_cl[1]) # schreibt den pfeil "->"
-        strich = 'n'        # wenn erstes element der Vokabelliste dann keinen "|"
-        for cat in st_cl[2]:
-            if strich == 'n':
-                fullgram.write(str(" \""+ cat +"\""))
-            if strich == "j":
-                # Changed this a bit since the previous order would write every last member of a category twice.
-                if cat == st_cl[2][-1]:   # wenn letztes element der vokabelliste mache linebreak
-                    fullgram.write(str(" | \""+ cat +"\"\n"))
-                else:
-                    fullgram.write(str(" | \""+ cat +"\""))
-            strich = "j"
-    fullgram.close()
-    
-make_gram(path2, path3, stated_classes)
-
-"""
 
 # Just needed something to bugtest.
 response = input("\nTo quit the selector, press ENTER.\n")
