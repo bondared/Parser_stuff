@@ -20,7 +20,7 @@ print("####################################################")
 wf.load(text_path, gram_path)
 
 ### Prompt to start the parsing process ###
-response = input("Shall we try and parse the bitch? (yes/no)\n")
+response = input("Ready to parse? (yes/no)\n")
 if response.lower().strip() != "yes":
     print("Okay. Be that way.")
     exit()

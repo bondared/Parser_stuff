@@ -20,7 +20,7 @@ print("#########################################################################
 wf.load(text_path, gram_path, rule_path)
 
 ### Prompt to start processing ###
-response = input("Shall we try and process the input? (yes/no)\n")
+response = input("Ready to process? (yes/no)\n")
 if response.lower().strip() != "yes":
     print("Okay. Be that way.")
     exit()
@@ -46,20 +46,22 @@ else:
 # See https://en.wikipedia.org/wiki/Brown_Corpus for info on the tags.
 stated_classes = [
                 ['DOT',['.','(',')','--',',',':',',-HL']],
-                ['A',['JJ','JJR','JJS','JJT','JJ-HL','JJR-HL','JJ-TL','VBN']],
+                ['A',['JJ','JJR','JJS','JJT','JJ-TL','VBN']],
                 ['Adv',['ABL','NR','NRS','QL','QLP','RB','RBR','RBT','RN','RP']],
                 ['C',['CC','CS','CC-TL','BED','BEDZ','BEM','BEN','BER','BEZ','BBB','DO','DOD','DOZ','HV','HVD','HVN','HVZ','MD','BEZ*','DO*','MD*']],
-                ['D',['AP','AT','DT','DTI','DTS','DTX','AT-HL']],
+                ['D',['AP','AT','DT','DTI','DTS','DTX','WDT']],
                 ['DP',['NP','NPS','PN','PPL','PPLS','PPO','PPS','PPSS','NP-TL']],
                 ['DPPOS',['NN$','NNS$','NP$','NPS$','PN$','PP$','PP$$','NN$-TL']],
-                ['N',['NN','NNS','NN-TL','NNS-HL','NNS-TL','NN-HL']],
+                ['N',['NN','NNS','NN-TL','NNS-TL']],
                 ['NEG',['*']],
                 ['P',['IN']],
                 ['Q',['ABN','ABX','CD','OD']],
-                ['QS',['WDT','WP$','WPO','WPS','WQL','WRB']],
-                ['V',['BE','BED','BEDZ','BEG','BEM','BEN','BER','BEZ','BBB','DO','DOD','DOZ','HV','HVD','HVG','HVN','HVZ','MD','VB','VBD','VBG','VBP','VBZ','VBN-HL','VBG-HL','BEZ*','DO*','MD*']],
-                ['TRASH',['-HL','-TL','-NC','TO','-*','EX','FW-','UH','DT+BEZ']]
+                ['QS',['WP$','WPO','WPS','WQL','WRB']],
+                ['V',['BE','BED','BEDZ','BEG','BEM','BEN','BER','BEZ','BBB','DO','DOD','DOZ','HV','HVD','HVG','HVN','HVZ','MD','VB','VBD','VBG','VBP','VBZ','BEZ*','DO*','MD*']],
+                ['EX',['EX']],
+                ['TRASH',['-TL','-NC','-*','TO','FW-','UH','DT+BEZ']]
                 ]
+
 
 print("\nCombining the nonterminal grammar with the modified ruleset and saving to new file...")
 wf.make_gram(rule_path, gram_path, stated_classes)

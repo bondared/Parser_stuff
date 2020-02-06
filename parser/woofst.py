@@ -47,11 +47,30 @@ def load(text_path, gram_path, rule_path=None):
 ### TEXT ###
 # Takes regex patterns and replaces them with spaces within a given text.
 def replace(text, pattern):
+    # Set up all the necessary variables
     alte_datei = open(text+'.txt','r')
     neue_datei = open(text+'_proc.txt','w')
+    total_len = 0
+    num_of_sents = 0
+    sents = []
+    # Remove symbols line-by-line, calculate the mean length.
     for line in alte_datei:
         new_line = re.sub(pattern, '', line)
-        neue_datei.write(new_line)
+        sentlist = new_line.split()
+        total_len += len(sentlist)
+        num_of_sents += 1
+        sents.append(new_line)
+    meanie = total_len/num_of_sents
+    print("Mean length of sentence: " + str(meanie))
+    # Use mean length as upper limit on what to write out.
+    limit = int(meanie + 1)
+    print("Writing only the sentences of length up to " + str(limit))
+    for line in sents:
+        anotherlist = line.split()
+        if len(anotherlist) <= limit:
+                neue_datei.write(line)
+        else:
+            continue
     neue_datei.close()
 
 ### GRAMMAR ###    

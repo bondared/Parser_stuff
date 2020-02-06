@@ -1,5 +1,6 @@
 import sys
 from nltk.corpus import brown
+import re
 
 ### CHANGE THESE TO CUSTOM PATHS IF RUNNING CODE IN SPYDER (e.g. "C:\Users\User\Desktop\filename.txt").###
 try:
@@ -10,7 +11,7 @@ except:
     path2 = "rules"
 
 ### Greet the user ###
-print("\n#####################################################################")
+print("\n######################################################################")
 print("Hello. This is the script for selecting texts and extracting POS tags.")
 print("######################################################################")
 print("\nThe Brown corpus has texts from the following genres:")
@@ -43,17 +44,26 @@ while flag:
         print("\nID accepted.\nRetrieving raw text and saving as " + str(path1) + "...")
         
         # Import a list of lists from Brown. Every sentence is a list of strings.
+        raw_text = brown.raw(fileids=[idquery])
+        # Uncomment to see the raw text with all the tags:
+        #with open(path1 + "_raw.txt", "w") as fookin_raw:
+        #    fookin_raw.write(raw_text)
         raw_sents = brown.sents(fileids=[idquery])
         clean_sents = []
         for sent in raw_sents:
             # Go into the list of sents, make every sent a single string.
             clean_sent = " ".join(sent)
-            clean_sents.append(clean_sent)
+            # Exclude headlines based on lack of final punctuation
+            punctuation = re.findall(r"( \.|,|``|\'\'|!|;|\?)$", clean_sent)
+            if punctuation:
+                clean_sents.append(clean_sent)
+            else:
+                continue
         # Make the whole text into a single string. We're basically undoing most of the preprocesing work.
         clean_text = "\n".join(clean_sents)
         # Save it to the first argument path.
         with open(path1 + ".txt", "w") as mr_clean:
-            print(clean_text, file = mr_clean)
+            mr_clean.write(clean_text)
             print("Done.")
         
         print("\nRetrieving all terminals from the tagged text and saving as " + str(path2) + ".txt...")
