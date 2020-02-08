@@ -52,14 +52,15 @@ stated_classes = [
                 ['D',['AP','AT','DT','DTI','DTS','DTX','WDT']],
                 ['DP',['NP','NPS','PN','PPL','PPLS','PPO','PPS','PPSS','NP-TL']],
                 ['DPPOS',['NN$','NNS$','NP$','NPS$','PN$','PP$','PP$$','NN$-TL']],
+                ['I',['TO','BED','BEDZ','BEM','BEN','BER','BEZ','BBB','DO','DOD','DOZ','HV','HVD','HVN','HVZ','MD','BEZ*','DO*','MD*']],
                 ['N',['NN','NNS','NN-TL','NNS-TL']],
                 ['NEG',['*']],
                 ['P',['IN']],
                 ['Q',['ABN','ABX','CD','OD']],
                 ['QS',['WP$','WPO','WPS','WQL','WRB']],
-                ['V',['BE','BED','BEDZ','BEG','BEM','BEN','BER','BEZ','BBB','DO','DOD','DOZ','HV','HVD','HVG','HVN','HVZ','MD','VB','VBD','VBG','VBP','VBZ','BEZ*','DO*','MD*']],
+                ['V',['BE','BED','BEDZ','BEG','BEM','BEN','BER','BEZ','BBB','DO','DOD','DOZ','HV','HVD','HVG','HVN','HVZ','MD','VB','VBD','VBG','VBN','VBP','VBZ','BEZ*','DO*','MD*']],
                 ['EX',['EX']],
-                ['TRASH',['-TL','-NC','-*','TO','FW-','UH','DT+BEZ']]
+                ['TRASH',['-TL','-NC','-*','FW-','UH','DT+BEZ']]
                 ]
 
 
