@@ -55,7 +55,7 @@ stated_classes = [
                 ['I',['TO','BED','BEDZ','BEM','BEN','BER','BEZ','BBB','DO','DOD','DOZ','HV','HVD','HVN','HVZ','MD','BEZ*','DO*','MD*']],
                 ['N',['CD','NP','NPS','NN','NNS','NN-TL','NNS-TL','NP-TL']],
                 ['NEG',['*']],
-                ['P',['IN']],
+                ['P',['IN','CS']],
                 ['Q',['ABN','ABX','CD','OD']],
                 ['QS',['WP$','WPO','WPS','WQL','WRB']],
                 ['V',['BE','BED','BEDZ','BEG','BEM','BEN','BER','BEZ','BBB','DO','DOD','DOZ','HV','HVD','HVG','HVN','HVZ','MD','VB','VBD','VBG','VBN','VBP','VBZ','BEZ*','DO*','MD*']],
